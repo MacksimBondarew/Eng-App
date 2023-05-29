@@ -31,6 +31,7 @@ const WordForm = ({ addWords }) => {
             id: nanoid(),
             ukrWord,
             engWord,
+            checked: false,
         };
         addWords(word);
         setUkrWord('');

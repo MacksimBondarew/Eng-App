@@ -1,8 +1,8 @@
 import WordsListItem from 'components/WordsListItem/WordsListItem';
-const WordsList = ({ words, deleteWord, editWord }) => {
+const WordsList = ({ words, deleteWord, editWord, checkWord }) => {
     return (
         <ul>
-            {words.map(({ id, ukrWord, engWord }, index) => {
+            {words.map(({ id, ukrWord, engWord, checked }, index) => {
                 return (
                     <WordsListItem
                         key={id}
@@ -12,6 +12,8 @@ const WordsList = ({ words, deleteWord, editWord }) => {
                         itemNumber={index + 1}
                         deleteWord={deleteWord}
                         editWord={editWord}
+                        checked={checked}
+                        checkWord={checkWord}
                     />
                 );
             })}

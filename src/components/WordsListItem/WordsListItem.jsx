@@ -8,12 +8,12 @@ const WordsListItem = ({
     itemNumber,
     deleteWord,
     editWord,
+    checked,
+    checkWord,
 }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [editUkrWord, setEditUkrWord] = useState(ukrWord);
     const [editEngWord, setEditEngWord] = useState(engWord);
-
-
 
     const handleChange = e => {
         const { name, value } = e.currentTarget;
@@ -45,6 +45,10 @@ const WordsListItem = ({
         <>
             <li>
                 <p>number: {itemNumber}</p>
+                <label>
+                    на вивчення
+                    <input type="checkbox" onChange={() => checkWord(id)} checked={checked} />
+                </label>
                 {isEdit ? (
                     <>
                         <TextField
@@ -73,7 +77,9 @@ const WordsListItem = ({
                 <button type="button" onClick={() => deleteWord(id)}>
                     Delete
                 </button>
-                <button type="button" onClick={() => edit()}>Edit</button>
+                <button type="button" onClick={() => edit()}>
+                    Edit
+                </button>
             </li>
         </>
     );
