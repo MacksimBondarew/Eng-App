@@ -7,9 +7,6 @@ import { Home } from 'pages/Home';
 import { Quiz } from 'pages/Quiz';
 
 
-// import WordForm from './WordForm/WordForm';
-// import WordsList from './WordsList/WordsList';
-
 export const App = () => {
     const [words, setWords] = useLocalStorage('words', []);
 
