@@ -39,6 +39,15 @@ export const App = () => {
         );
     }
 
+    const handleQuizAnswer  = (event, randomWord) => {
+        const engWord = event.target.innerText;
+        if (randomWord.engWord === engWord) {
+            checkWord(randomWord.id)
+        } else {
+            console.log('-');
+        }
+    }; 
+
     return (
         <>
             <Routes>
@@ -52,7 +61,7 @@ export const App = () => {
                         />
                     }
                     />
-                    <Route path='/quiz' element={<Quiz words={ words } />} />
+                    <Route path='/quiz' element={<Quiz checkWord={checkWord} handleQuizAnswer={handleQuizAnswer } words={ words }  />} />
                 </Route>
             </Routes> 
         </>
