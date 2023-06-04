@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import shuffle from 'lodash.shuffle';
 import { nanoid } from 'nanoid';
 
@@ -55,17 +55,13 @@ export const QuizComponent = ({ words, checkWord }) => {
             checkedWords[
                 getRandomIntegetFromInterval(0, checkedWords.length - 1)
             ];
-        setRandomWord(newRandomWord);
+        return setRandomWord(newRandomWord);
     };
-    useEffect(() => {
-        console.log(123)
-        console.log(randomWord);
-        console.log(checkedWords);
-    })
 
     return (
         <div>
             <h2>{randomWord.ukrWord}</h2>
+            <p> It remains to learn the words {checkedWords.length}   </p>
             {variants.map(variant => (
                 <button
                     key={nanoid()}
