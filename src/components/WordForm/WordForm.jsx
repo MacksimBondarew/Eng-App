@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
+import { Button, Container, Input } from '@chakra-ui/react';
 
 const WordForm = ({ addWords }) => {
     const [ukrWord, setUkrWord] = useState('');
@@ -33,25 +34,37 @@ const WordForm = ({ addWords }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", margin: "20px auto", maxWidth: '360px'}}>
-            <input
-                label="ukrainian"
-                variant="outlined"
-                type="text"
-                value={ukrWord}
-                name="ukrWord"
-                onChange={handleChange}
-            />
-            <input
-                label="english"
-                variant="outlined"
-                type="text"
-                value={engWord}
-                name="engWord"
-                onChange={handleChange}
-            />
-            <button variant="contained" type="submit">add word</button>
-        </form>
+        <Container width='400px' margin='20px auto 0 auto'>
+            <form
+                onSubmit={handleSubmit}
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    flexWrap: "wrap",
+                }}
+            >
+                <Input
+                    label="ukrainian"
+                    variant="outlined"
+                    type="text"
+                    value={ukrWord}
+                    name="ukrWord"
+                    onChange={handleChange}
+                    height='50px'
+                />
+                <Input
+                    label="english"
+                    variant="outlined"
+                    type="text"
+                    value={engWord}
+                    name="engWord"
+                    onChange={handleChange}
+                />
+                <Button variant="contained" type="submit">
+                    add word
+                </Button>
+            </form>
+        </Container>
     );
 };
 
