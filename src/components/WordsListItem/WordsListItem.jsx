@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import TextField from '@mui/material/TextField';
 
 const WordsListItem = ({
     id,
@@ -51,7 +50,7 @@ const WordsListItem = ({
                 </label>
                 {isEdit ? (
                     <>
-                        <TextField
+                        <input
                             label="ukrainian"
                             variant="outlined"
                             type="text"
@@ -59,7 +58,7 @@ const WordsListItem = ({
                             name="ukrWord"
                             onChange={handleChange}
                         />
-                        <TextField
+                        <input
                             label="english"
                             variant="outlined"
                             type="text"

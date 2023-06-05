@@ -1,11 +1,5 @@
 import { useState } from 'react';
 import { nanoid } from 'nanoid';
-import styled from '@emotion/styled';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-const Input = styled(TextField)`
-    margin-bottom: 10px !important;
-`;
 
 const WordForm = ({ addWords }) => {
     const [ukrWord, setUkrWord] = useState('');
@@ -40,7 +34,7 @@ const WordForm = ({ addWords }) => {
 
     return (
         <form onSubmit={handleSubmit} style={{display: "flex", flexDirection: "column", margin: "20px auto", maxWidth: '360px'}}>
-            <Input
+            <input
                 label="ukrainian"
                 variant="outlined"
                 type="text"
@@ -48,7 +42,7 @@ const WordForm = ({ addWords }) => {
                 name="ukrWord"
                 onChange={handleChange}
             />
-            <Input
+            <input
                 label="english"
                 variant="outlined"
                 type="text"
@@ -56,7 +50,7 @@ const WordForm = ({ addWords }) => {
                 name="engWord"
                 onChange={handleChange}
             />
-            <Button variant="contained" type="submit">add word</Button>
+            <button variant="contained" type="submit">add word</button>
         </form>
     );
 };
