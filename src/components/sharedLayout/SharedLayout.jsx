@@ -2,7 +2,7 @@ import { Icon } from '@chakra-ui/react';
 import styled from '@emotion/styled';
 import * as React from 'react';
 import { Outlet } from 'react-router';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 
 export const SharedLayout = () => {
     return (
@@ -75,8 +75,8 @@ export const SharedLayout = () => {
                     </Icon>
                 </Link>
                 <Nav>
-                    <Link to="/">Home</Link>
-                    <Link to="/quiz">Quiz</Link>
+                    <LinkActive to="/">Home</LinkActive>
+                    <LinkActive to="/quiz">Quiz</LinkActive>
                 </Nav>
             </Header>
             <Outlet />
@@ -100,7 +100,7 @@ const Nav = styled.nav`
     gap: 1rem;
 `;
 
-const Link = styled(NavLink)`
+const LinkActive = styled(NavLink)`
     font-size: 1.2rem;
     text-decoration: none;
     color: white;
