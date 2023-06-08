@@ -7,6 +7,7 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
+    Text,
 } from '@chakra-ui/react';
 import { ArrowForwardIcon } from '@chakra-ui/icons';
 
@@ -42,15 +43,37 @@ const WordForm = ({ addWords }) => {
     };
 
     return (
-        <Container display="flex" justifyContent="center" paddingTop="20">
-            <form onSubmit={handleSubmit}>
+        <Container
+            display="flex"
+            justifyContent="center"
+            paddingTop="20"
+            paddingBottom="80px"
+        >
+            <form
+                onSubmit={handleSubmit}
+                style={{
+                    border: '3px solid #3eb489',
+                    borderRadius: '16px',
+                    padding: '30px 20px 30px 20px',
+                    display: 'flex',
+                    flexWrap: 'wrap',
+                    justifyContent: 'center',
+                }}
+            >
+                <Text
+                    fontSize="25px"
+                    textAlign="center"
+                    fontWeight="semibold"
+                    mb="30px"
+                >
+                    Here you can add a word to your dictionary
+                </Text>
                 <InputGroup
                     marginBottom="50"
                     alignItems="center"
                     justifyContent="center"
                     display="flex"
                     gap="30px"
-                    
                 >
                     <InputGroup>
                         <InputLeftElement pointerEvents="none" height="48px">
@@ -60,8 +83,8 @@ const WordForm = ({ addWords }) => {
                                 viewBox="0 0 30 30.000001"
                                 preserveAspectRatio="xMidYMid meet"
                                 version="1.0"
-                                width='20px'
-                                height='20px'
+                                width="20px"
+                                height="20px"
                             >
                                 <defs>
                                     <clipPath id="id1">
@@ -110,8 +133,8 @@ const WordForm = ({ addWords }) => {
                             <Icon
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 60 30"
-                                width='20px'
-                                height='20px'
+                                width="20px"
+                                height="20px"
                             >
                                 <clipPath id="s">
                                     <path d="M0,0 v30 h60 v-30 z" />
@@ -162,11 +185,10 @@ const WordForm = ({ addWords }) => {
                 <Button
                     variant="contained"
                     type="submit"
-                    display="block"
-                    marginLeft="auto"
-                    marginRight="auto"
+                    backgroundColor="#3CB371 "
+                    color="white"
                 >
-                    add word
+                    Add word
                 </Button>
             </form>
         </Container>
