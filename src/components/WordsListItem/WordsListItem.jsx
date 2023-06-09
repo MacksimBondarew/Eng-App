@@ -1,20 +1,23 @@
 import { ArrowForwardIcon, DeleteIcon, RepeatIcon } from '@chakra-ui/icons';
 import { Box, Button, Checkbox, GridItem, Input, Text } from '@chakra-ui/react';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Flag from 'react-world-flags';
+import { editWord } from 'redux/operations';
+
 
 const WordsListItem = ({
     id,
     ukrWord,
     engWord,
     deleteWord,
-    editWord,
     checked,
     checkWord,
 }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [editUkrWord, setEditUkrWord] = useState(ukrWord);
     const [editEngWord, setEditEngWord] = useState(engWord);
+    const dispatch = useDispatch();
 
     const handleChange = e => {
         const { name, value } = e.currentTarget;
@@ -38,7 +41,7 @@ const WordsListItem = ({
                 ukrWord: editUkrWord,
                 engWord: editEngWord,
             };
-            editWord(word);
+            dispatch(editWord(word));
         }
     };
 

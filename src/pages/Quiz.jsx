@@ -3,7 +3,7 @@ import { Box, Button, Container, Text } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
 
-export const Quiz = ({ words, handleQuizAnswer, checkWord }) => {
+export const Quiz = ({ words, checkWord }) => {
     let checked = 0;
     words.forEach(function (number) {
         if (number.checked === true) {
@@ -27,7 +27,6 @@ export const Quiz = ({ words, handleQuizAnswer, checkWord }) => {
             {checked > 0 && words.length > 2 ? (
                 <QuizComponent
                     checkWord={checkWord}
-                    handleQuizAnswer={handleQuizAnswer}
                     words={words}
                 />
             ) : (

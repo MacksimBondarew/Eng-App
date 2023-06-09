@@ -1,0 +1,1 @@
+export const selectWords = data => data.words.words;
