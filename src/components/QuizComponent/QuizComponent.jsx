@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import shuffle from 'lodash.shuffle';
 import { nanoid } from 'nanoid';
+import { Box, Button, Text } from '@chakra-ui/react';
 
 const getRandomIntegetFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -11,8 +12,9 @@ export const QuizComponent = ({ words, checkWord }) => {
     const [randomWord, setRandomWord] = useState(
         checkedWords[getRandomIntegetFromInterval(0, checkedWords.length - 1)]
     );
+    const [submited, setSubmited] = useState(false);
     function getVariants() {
-        const variants = new Array(4).fill(null).reduce((acc, _, index) => {
+        const variants = new Array(3).fill(null).reduce((acc, _, index) => {
             if (!index) {
                 return [randomWord];
             }
@@ -41,10 +43,13 @@ export const QuizComponent = ({ words, checkWord }) => {
         return words.filter(word => word.checked);
     }
     const handleQuizAnswer = (event, randomWord) => {
+        setSubmited(false);
         const engWord = event.target.innerText;
         if (randomWord.engWord === engWord) {
             checkWord(randomWord.id);
-            setCheckedWords(prevState => prevState.filter(word => word.engWord !== engWord));
+            setCheckedWords(prevState =>
+                prevState.filter(word => word.engWord !== engWord)
+            );
             const newRandomWord =
                 checkedWords[
                     getRandomIntegetFromInterval(0, checkedWords.length - 1)
@@ -55,21 +60,34 @@ export const QuizComponent = ({ words, checkWord }) => {
             checkedWords[
                 getRandomIntegetFromInterval(0, checkedWords.length - 1)
             ];
+        setSubmited(false);
         return setRandomWord(newRandomWord);
     };
 
     return (
-        <div>
-            <h2>{randomWord.ukrWord}</h2>
-            <p> It remains to learn the words {checkedWords.length}   </p>
+        <Box padding="30px 20px" border="3px solid #3eb489" borderRadius="15px">
+            <Text fontWeight="600" fontSize="30px" textAlign="center">
+                {randomWord?.ukrWord}
+            </Text>
+            <Text textAlign="center" fontSize="sm" color="gray.400" mb="30px">
+                It remains to learn the words {checkedWords.length}
+            </Text>
             {variants.map(variant => (
-                <button
+                <Button
                     key={nanoid()}
                     onClick={event => handleQuizAnswer(event, randomWord)}
+                    mr="10px"
+                    colorScheme={
+                        submited
+                            ? variant?.engWord === randomWord.engWord
+                                ? 'whatsapp'
+                                : 'red'
+                            : 'gray'
+                    }
                 >
-                    {variant.engWord}
-                </button>
+                    {variant?.engWord}
+                </Button>
             ))}
-        </div>
+        </Box>
     );
 };
