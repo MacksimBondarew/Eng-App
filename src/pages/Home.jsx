@@ -1,16 +1,11 @@
-import WordForm from "components/WordForm/WordForm";
-import WordsList from "components/WordsList/WordsList";
+import WordForm from 'components/WordForm/WordForm';
+import WordsList from 'components/WordsList/WordsList';
 
-export const Home = ({addWords, checkWord, words, deleteWord, editWord}) => {
+export const Home = () => {
     return (
         <>
-            <WordForm addWords={addWords} />
-            <WordsList
-                checkWord={checkWord}
-                words={words}
-                deleteWord={deleteWord}
-                editWord={editWord}
-            />
+            <WordForm />
+            <WordsList />
         </>
     );
-}
+};

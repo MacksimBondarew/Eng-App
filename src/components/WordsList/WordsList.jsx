@@ -2,7 +2,7 @@ import { Container, Grid } from '@chakra-ui/react';
 import WordsListItem from 'components/WordsListItem/WordsListItem';
 import { useSelector } from 'react-redux';
 import { selectWords } from 'redux/selectors';
-const WordsList = ({ deleteWord, editWord, checkWord }) => {
+const WordsList = () => {
     const words = useSelector(selectWords);
     return (
         <Container
@@ -23,10 +23,7 @@ const WordsList = ({ deleteWord, editWord, checkWord }) => {
                             id={id}
                             ukrWord={ukrWord}
                             engWord={engWord}
-                            deleteWord={deleteWord}
-                            editWord={editWord}
                             checked={checked}
-                            checkWord={checkWord}
                         />
                     );
                 })}

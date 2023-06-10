@@ -2,14 +2,12 @@ import { QuizComponent } from 'components/QuizComponent/QuizComponent';
 import { Box, Button, Container, Text } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectWords } from 'redux/selectors';
 
-export const Quiz = ({ words, checkWord }) => {
-    let checked = 0;
-    words.forEach(function (number) {
-        if (number.checked === true) {
-            checked += 1;
-        }
-    });
+export const Quiz = () => {
+    const words = useSelector(selectWords);
+    const checkedWords = words.filter(word => word.checked === true);
 
     return (
         <Container
@@ -24,11 +22,8 @@ export const Quiz = ({ words, checkWord }) => {
                 justifyContent: 'center',
             }}
         >
-            {checked > 0 && words.length > 2 ? (
-                <QuizComponent
-                    checkWord={checkWord}
-                    words={words}
-                />
+            {checkedWords.length > 0 && words.length > 2 ? (
+                <QuizComponent />
             ) : (
                 <Box
                     borderRadius="15px"

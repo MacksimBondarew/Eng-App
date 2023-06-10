@@ -15,7 +15,7 @@ import Flag from 'react-world-flags';
 import { useDispatch } from 'react-redux';
 import { addWord } from 'redux/words';
 
-const WordForm = ({ addWords }) => {
+const WordForm = () => {
     const [ukrWord, setUkrWord] = useState('');
     const [engWord, setEngWord] = useState('');
     const [submited, setSubmited] = useState(false);

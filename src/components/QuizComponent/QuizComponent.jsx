@@ -1,18 +1,27 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import shuffle from 'lodash.shuffle';
-import { nanoid } from 'nanoid';
 import { Box, Button, Text } from '@chakra-ui/react';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectWords } from 'redux/selectors';
+import { checkWord } from 'redux/words';
 
 const getRandomIntegetFromInterval = (min, max) => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const QuizComponent = ({ words, checkWord }) => {
+export const QuizComponent = () => {
+    const words = useSelector(selectWords);
     const [checkedWords, setCheckedWords] = useState(filteredWords(words));
     const [randomWord, setRandomWord] = useState(
         checkedWords[getRandomIntegetFromInterval(0, checkedWords.length - 1)]
     );
     const [submited, setSubmited] = useState(false);
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        setRandomWord(checkedWords[getRandomIntegetFromInterval(0, checkedWords.length - 1)]);
+    }, [checkedWords]);
+
     function getVariants() {
         const variants = new Array(3).fill(null).reduce((acc, _, index) => {
             if (!index) {
@@ -42,28 +51,20 @@ export const QuizComponent = ({ words, checkWord }) => {
     function filteredWords(words) {
         return words.filter(word => word.checked);
     }
-    const handleQuizAnswer = (event, randomWord) => {
-        setSubmited(false);
-        const engWord = event.target.innerText;
-        if (randomWord.engWord === engWord) {
-            checkWord(randomWord.id);
+    const handleQuizAnswer = id => {
+        if (randomWord.id === id) {
+            dispatch(checkWord(randomWord.id));
             setCheckedWords(prevState =>
-                prevState.filter(word => word.engWord !== engWord)
+                prevState.filter(word => word.id !== randomWord.id)
             );
+        } 
+        else {
+            const remainingWords = checkedWords.filter(word => word.id !== randomWord.id);
             const newRandomWord =
-                checkedWords[
-                    getRandomIntegetFromInterval(0, checkedWords.length - 1)
-                ];
-            return setRandomWord(newRandomWord);
+                remainingWords[getRandomIntegetFromInterval(0, remainingWords.length - 1)];
+            setRandomWord(newRandomWord);
         }
-        const newRandomWord =
-            checkedWords[
-                getRandomIntegetFromInterval(0, checkedWords.length - 1)
-            ];
-        setSubmited(false);
-        return setRandomWord(newRandomWord);
     };
-
     return (
         <Box padding="30px 20px" border="3px solid #3eb489" borderRadius="15px">
             <Text fontWeight="600" fontSize="30px" textAlign="center">
@@ -72,14 +73,15 @@ export const QuizComponent = ({ words, checkWord }) => {
             <Text textAlign="center" fontSize="sm" color="gray.400" mb="30px">
                 It remains to learn the words {checkedWords.length}
             </Text>
-            {variants.map(variant => (
+
+            {variants?.map(variant => (
                 <Button
-                    key={nanoid()}
-                    onClick={event => handleQuizAnswer(event, randomWord)}
+                    key={variant?.id}
+                    onClick={() => handleQuizAnswer(variant.id)}
                     mr="10px"
                     colorScheme={
                         submited
-                            ? variant?.engWord === randomWord.engWord
+                            ? variant.engWord === randomWord.engWord
                                 ? 'whatsapp'
                                 : 'red'
                             : 'gray'

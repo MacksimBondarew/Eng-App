@@ -3,17 +3,9 @@ import { Box, Button, Checkbox, GridItem, Input, Text } from '@chakra-ui/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Flag from 'react-world-flags';
-import { editWord } from 'redux/operations';
+import { checkWord, deleteWord, editWord } from 'redux/words';
 
-
-const WordsListItem = ({
-    id,
-    ukrWord,
-    engWord,
-    deleteWord,
-    checked,
-    checkWord,
-}) => {
+const WordsListItem = ({ id, ukrWord, engWord, checked }) => {
     const [isEdit, setIsEdit] = useState(false);
     const [editUkrWord, setEditUkrWord] = useState(ukrWord);
     const [editEngWord, setEditEngWord] = useState(engWord);
@@ -110,7 +102,7 @@ const WordsListItem = ({
                         width="80px"
                         height="30px"
                         colorScheme="red"
-                        onClick={() => deleteWord(id)}
+                        onClick={() => dispatch(deleteWord(id))}
                     >
                         Delete
                     </Button>
@@ -129,7 +121,7 @@ const WordsListItem = ({
                 </Box>
                 <Box display="flex" flexWrap="wrap" justifyContent="center">
                     <Checkbox
-                        onChange={() => checkWord(id)}
+                        onChange={() => dispatch(checkWord(id))}
                         isChecked={checked}
                         colorScheme="green"
                         fontWeight="600"
